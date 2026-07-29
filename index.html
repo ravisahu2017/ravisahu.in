@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body { font-family: 'Inter', sans-serif; }
+        .badge-flip.flipped { transform: rotateY(180deg); }
     </style>
 </head>
 <body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 antialiased selection:bg-blue-600 selection:text-white transition-colors duration-300">
@@ -28,9 +29,9 @@
     <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-50/80 dark:bg-slate-950/80 border-b border-slate-200/60 dark:border-slate-800/60 transition-colors duration-300">
         <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
             <a href="https://github.com/ravisahu2017" target="_blank" class="flex items-center gap-3 group" title="View GitHub Profile">
-                <!-- Hover 3D Flip Badge -->
+                <!-- Hover & Scroll 3D Flip Badge -->
                 <div class="w-8 h-8 relative shrink-0 [perspective:1000px]">
-                    <div class="w-full h-full relative transition-transform duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                    <div id="rsBadge" class="badge-flip w-full h-full relative transition-transform duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
                         <!-- Front Badge (RS) -->
                         <div class="absolute inset-0 rounded-lg bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 font-bold flex items-center justify-center text-xs tracking-wider [backface-visibility:hidden] shadow-sm">
                             RS
@@ -405,6 +406,18 @@
 
         // Set dynamic year
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Scroll-triggered RS Badge Flip
+        const rsBadge = document.getElementById('rsBadge');
+        const handleScroll = () => {
+            if (window.scrollY > 30) {
+                rsBadge?.classList.add('flipped');
+            } else {
+                rsBadge?.classList.remove('flipped');
+            }
+        };
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll();
     </script>
 </body>
 </html>
