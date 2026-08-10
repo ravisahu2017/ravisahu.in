@@ -114,6 +114,75 @@
         .badge-flip.flipped {
             transform: rotateY(180deg);
         }
+
+        /* Social proof bar marquee */
+        @keyframes brand-slide {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .brand-track {
+            display: flex;
+            animation: brand-slide 18s linear infinite;
+            width: max-content;
+        }
+
+        .brand-track:hover {
+            animation-play-state: paused;
+        }
+
+        /* Timeline connector */
+        .timeline-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 19px;
+            top: 40px;
+            bottom: -24px;
+            width: 2px;
+            background: linear-gradient(to bottom, #3b82f6, transparent);
+        }
+
+        /* Outcome card hover glow */
+        .outcome-card {
+            transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .outcome-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px -6px rgba(59, 130, 246, 0.18);
+        }
+
+        /* Free call banner pulse ring */
+        @keyframes ping-slow {
+
+            75%,
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        .ping-slow {
+            animation: ping-slow 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        /* Case study badge */
+        .cs-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            padding: 2px 8px;
+            border-radius: 99px;
+        }
     </style>
 </head>
 
@@ -197,62 +266,144 @@
                 Fractional CTO & Technical Founding Partner
             </h1>
 
+            <!-- ① Brand Social Proof Bar -->
+            <p class="text-sm sm:text-base font-semibold text-slate-700 dark:text-slate-200 leading-snug">
+                Battle-Tested Engineering Experience From Lead Roles at
+                <span class="text-blue-600 dark:text-blue-400">Wiom</span> &
+                <span class="text-blue-600 dark:text-blue-400">Adobe</span>.
+            </p>
+
+            <!-- Scrolling logo trust bar -->
+            <div class="overflow-hidden w-full mt-1 mb-1">
+                <div class="brand-track select-none" aria-hidden="true">
+                    <!-- Set 1 -->
+                    <span class="mx-5 flex items-center shrink-0">
+                        <img src="wiom-logo.svg" alt="Wiom" class="h-5 opacity-60 dark:opacity-40 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+                    </span>
+                    <span class="mx-5 flex items-center shrink-0">
+                        <img src="adobe-logo.svg" alt="Adobe" class="h-5 opacity-60 dark:opacity-40 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+                    </span>
+                    <span
+                        class="mx-5 flex items-center gap-2 text-slate-500 dark:text-slate-400 text-xs font-semibold tracking-wide shrink-0">
+                        <i class="fas fa-graduation-cap text-amber-500"></i> NIT Bhopal
+                    </span>
+                    <span
+                        class="mx-5 flex items-center gap-2 text-slate-500 dark:text-slate-400 text-xs font-semibold tracking-wide shrink-0">
+                        <i class="fas fa-server text-emerald-500"></i> Event Streaming at Scale
+                    </span>
+                    <span
+                        class="mx-5 flex items-center gap-2 text-slate-500 dark:text-slate-400 text-xs font-semibold tracking-wide shrink-0">
+                        <i class="fas fa-microchip text-purple-500"></i> AI & LLM Workflows
+                    </span>
+                    <span
+                        class="mx-5 flex items-center gap-2 text-slate-500 dark:text-slate-400 text-xs font-semibold tracking-wide shrink-0">
+                        <i class="fas fa-cloud text-sky-500"></i> Cloud-Native Deployments
+                    </span>
+                    <!-- Set 2 (duplicate for seamless loop) -->
+                    <span class="mx-5 flex items-center shrink-0">
+                        <img src="wiom-logo.svg" alt="Wiom" class="h-5 opacity-60 dark:opacity-40 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+                    </span>
+                    <span class="mx-5 flex items-center shrink-0">
+                        <img src="adobe-logo.svg" alt="Adobe" class="h-5 opacity-60 dark:opacity-40 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+                    </span>
+                    <span
+                        class="mx-5 flex items-center gap-2 text-slate-500 dark:text-slate-400 text-xs font-semibold tracking-wide shrink-0">
+                        <i class="fas fa-graduation-cap text-amber-500"></i> NIT Bhopal
+                    </span>
+                    <span
+                        class="mx-5 flex items-center gap-2 text-slate-500 dark:text-slate-400 text-xs font-semibold tracking-wide shrink-0">
+                        <i class="fas fa-server text-emerald-500"></i> Event Streaming at Scale
+                    </span>
+                    <span
+                        class="mx-5 flex items-center gap-2 text-slate-500 dark:text-slate-400 text-xs font-semibold tracking-wide shrink-0">
+                        <i class="fas fa-microchip text-purple-500"></i> AI & LLM Workflows
+                    </span>
+                    <span
+                        class="mx-5 flex items-center gap-2 text-slate-500 dark:text-slate-400 text-xs font-semibold tracking-wide shrink-0">
+                        <i class="fas fa-cloud text-sky-500"></i> Cloud-Native Deployments
+                    </span>
+                </div>
+            </div>
+
             <p class="text-slate-600 dark:text-slate-400 text-base sm:text-lg leading-relaxed font-normal">
                 I partner with founders to design, build, and scale end-to-end applications—from full-stack web & mobile
                 apps to AI chatbots, e-commerce platforms, and organic growth engines.
             </p>
 
-            <!-- Direct Contact CTAs -->
-            <div class="pt-2 flex flex-wrap items-center justify-center gap-2.5">
-                <a href="https://wa.me/918586004551" target="_blank"
-                    class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all shadow-sm">
-                    <i class="fab fa-whatsapp text-sm"></i>
-                    <span>Chat on WhatsApp</span>
+            <!-- ③ Free 15-min CTA (primary) + secondary links -->
+            <div class="pt-2 space-y-3">
+                <!-- Primary CTA -->
+                <a href="https://wa.me/918586004551?text=Hi%20Ravi%2C%20I%27d%20like%20to%20book%20a%20free%2015-minute%20Technical%20Feasibility%20%26%20Architecture%20Teardown%20call."
+                    target="_blank" id="hero-free-call-cta"
+                    class="group relative inline-flex items-center justify-center gap-2.5 w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl text-sm font-bold transition-all shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40">
+                    <span class="relative flex h-2.5 w-2.5">
+                        <span
+                            class="ping-slow absolute inline-flex h-full w-full rounded-full bg-white opacity-60"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span>
+                    </span>
+                    Book a Free 15-Min Architecture Teardown
+                    <i
+                        class="fas fa-arrow-right text-xs opacity-70 group-hover:translate-x-0.5 transition-transform"></i>
                 </a>
-                <a href="tel:+918586004551"
-                    class="bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-800 px-5 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all shadow-sm">
-                    <i class="fas fa-phone text-blue-600 dark:text-blue-400 text-xs"></i>
-                    <span>Call Directly</span>
-                </a>
-                <a href="https://medium.com/@ravisahu" target="_blank"
-                    class="bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-800 px-5 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all shadow-sm">
-                    <i class="fab fa-medium text-slate-800 dark:text-slate-200 text-sm"></i>
-                    <span>Medium Articles</span>
-                </a>
-                <a href="https://github.com/ravisahu2017" target="_blank"
-                    class="bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-800 px-5 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all shadow-sm">
-                    <i class="fab fa-github text-slate-800 dark:text-slate-200 text-sm"></i>
-                    <span>GitHub</span>
-                </a>
-                <a href="https://linkedin.com/in/ravisahu2017" target="_blank"
-                    class="bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-800 px-5 py-2.5 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all shadow-sm">
-                    <i class="fab fa-linkedin text-blue-600 dark:text-blue-400 text-sm"></i>
-                    <span>LinkedIn</span>
-                </a>
+                <!-- Secondary links -->
+                <div class="flex flex-wrap items-center justify-center gap-2">
+                    <a href="https://wa.me/918586004551" target="_blank"
+                        class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all shadow-sm">
+                        <i class="fab fa-whatsapp text-sm"></i>
+                        <span>WhatsApp</span>
+                    </a>
+                    <a href="tel:+918586004551"
+                        class="bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-800 px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all shadow-sm">
+                        <i class="fas fa-phone text-blue-600 dark:text-blue-400 text-xs"></i>
+                        <span>Call Directly</span>
+                    </a>
+                    <a href="https://medium.com/@ravisahu" target="_blank"
+                        class="bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-800 px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all shadow-sm">
+                        <i class="fab fa-medium text-slate-800 dark:text-slate-200 text-sm"></i>
+                        <span>Case Studies</span>
+                    </a>
+                    <a href="https://github.com/ravisahu2017" target="_blank"
+                        class="bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-800 px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all shadow-sm">
+                        <i class="fab fa-github text-slate-800 dark:text-slate-200 text-sm"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://linkedin.com/in/ravisahu2017" target="_blank"
+                        class="bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-800 px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all shadow-sm">
+                        <i class="fab fa-linkedin text-blue-600 dark:text-blue-400 text-sm"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                </div>
             </div>
         </section>
 
+        <!-- ④ Capabilities reframed as Founder Outcomes -->
         <section class="space-y-6">
             <div class="space-y-1">
                 <p
                     class="text-[11px] font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400 font-semibold">
-                    End-to-End Capabilities</p>
-                <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Complete 360° Development
-                    Coverage</h2>
+                    Packaged for Founders</p>
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">What You Walk Away With</h2>
             </div>
 
-            <div class="grid sm:grid-cols-2 gap-4">
-                <!-- Pillar 1 -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Outcome 1: 0→1 MVP Build -->
                 <div
-                    class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 transition-all hover:border-slate-300 dark:hover:border-slate-700 shadow-sm">
-                    <div
-                        class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 flex items-center justify-center text-sm mb-4">
-                        <i class="fas fa-layer-group"></i>
+                    class="outcome-card bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm">
+                    <div class="flex items-start gap-3 mb-3">
+                        <div
+                            class="w-9 h-9 rounded-lg bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 flex items-center justify-center text-sm shrink-0">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div>
+                            <span
+                                class="cs-badge bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 mb-1">4–6
+                                Weeks</span>
+                            <h3 class="text-base font-semibold text-slate-900 dark:text-white leading-snug">0 → 1 MVP
+                                Build</h3>
+                        </div>
                     </div>
-                    <h3 class="text-base font-semibold text-slate-900 dark:text-white mb-1.5">1. Full-Stack Product
-                        Engineering</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-xs mb-4 leading-relaxed">Clean, scalable
-                        architectures designed for production readiness from day one.</p>
+                    <p class="text-slate-500 dark:text-slate-400 text-xs mb-4 leading-relaxed">Complete web & mobile app
+                        build from wireframes to cloud launch. Production-ready, not just a prototype.</p>
                     <ul class="space-y-2 text-xs text-slate-700 dark:text-slate-300">
                         <li class="flex items-center gap-2"><i
                                 class="fas fa-check text-blue-600 dark:text-blue-400 text-[10px]"></i> Web Portals &
@@ -262,83 +413,253 @@
                             Mobile Applications</li>
                         <li class="flex items-center gap-2"><i
                                 class="fas fa-check text-blue-600 dark:text-blue-400 text-[10px]"></i> Scalable Backend
-                            Servers & REST/GraphQL APIs</li>
+                            APIs & Secure Auth</li>
                         <li class="flex items-center gap-2"><i
                                 class="fas fa-check text-blue-600 dark:text-blue-400 text-[10px]"></i> Database
-                            Architecture & Secure Authentication</li>
+                            Architecture & Cloud Deployment</li>
                     </ul>
                 </div>
 
-                <!-- Pillar 2 -->
+                <!-- Outcome 2: AI & Automation Integration -->
                 <div
-                    class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 transition-all hover:border-slate-300 dark:hover:border-slate-700 shadow-sm">
-                    <div
-                        class="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-sm mb-4">
-                        <i class="fas fa-robot"></i>
+                    class="outcome-card bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm">
+                    <div class="flex items-start gap-3 mb-3">
+                        <div
+                            class="w-9 h-9 rounded-lg bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-sm shrink-0">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div>
+                            <span
+                                class="cs-badge bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 mb-1">Scale
+                                Operations</span>
+                            <h3 class="text-base font-semibold text-slate-900 dark:text-white leading-snug">AI &
+                                Automation Integration</h3>
+                        </div>
                     </div>
-                    <h3 class="text-base font-semibold text-slate-900 dark:text-white mb-1.5">2. AI & Intelligent
-                        Workflows</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-xs mb-4 leading-relaxed">Automated systems to
-                        engage users 24/7 and streamline operational pipelines.</p>
+                    <p class="text-slate-500 dark:text-slate-400 text-xs mb-4 leading-relaxed">Custom LLM workflows,
+                        automated CRM pipelines, and intelligent chatbots that scale operations without scaling
+                        headcount.</p>
                     <ul class="space-y-2 text-xs text-slate-700 dark:text-slate-300">
                         <li class="flex items-center gap-2"><i
                                 class="fas fa-check text-emerald-600 dark:text-emerald-400 text-[10px]"></i> Custom AI
-                            Chatbots & Human Handover Logic</li>
+                            Chatbots & LLM Pipelines</li>
                         <li class="flex items-center gap-2"><i
                                 class="fas fa-check text-emerald-600 dark:text-emerald-400 text-[10px]"></i> WhatsApp &
-                            SMS Automated Customer Messaging</li>
+                            SMS Automated Messaging</li>
                         <li class="flex items-center gap-2"><i
                                 class="fas fa-check text-emerald-600 dark:text-emerald-400 text-[10px]"></i> Lead
-                            Tracking Systems & Custom CRM Pipelines</li>
+                            Tracking & Automated CRM Flows</li>
                     </ul>
                 </div>
 
-                <!-- Pillar 3 -->
+                <!-- Outcome 3: Scalability & Teardown -->
                 <div
-                    class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 transition-all hover:border-slate-300 dark:hover:border-slate-700 shadow-sm">
-                    <div
-                        class="w-8 h-8 rounded-lg bg-purple-50 dark:bg-purple-950/50 text-purple-600 dark:text-purple-400 flex items-center justify-center text-sm mb-4">
-                        <i class="fas fa-store"></i>
+                    class="outcome-card bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm">
+                    <div class="flex items-start gap-3 mb-3">
+                        <div
+                            class="w-9 h-9 rounded-lg bg-purple-50 dark:bg-purple-950/50 text-purple-600 dark:text-purple-400 flex items-center justify-center text-sm shrink-0">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                        <div>
+                            <span
+                                class="cs-badge bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 mb-1">Investor-Ready</span>
+                            <h3 class="text-base font-semibold text-slate-900 dark:text-white leading-snug">Scalability
+                                & Technical Teardown</h3>
+                        </div>
                     </div>
-                    <h3 class="text-base font-semibold text-slate-900 dark:text-white mb-1.5">3. E-Commerce Solutions
-                    </h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-xs mb-4 leading-relaxed">Customized digital
-                        storefronts tailored to turn visitors into paying customers.</p>
+                    <p class="text-slate-500 dark:text-slate-400 text-xs mb-4 leading-relaxed">Codebase review, database
+                        optimization, and cloud architecture prep before you raise your funding round.</p>
                     <ul class="space-y-2 text-xs text-slate-700 dark:text-slate-300">
                         <li class="flex items-center gap-2"><i
-                                class="fas fa-check text-purple-600 dark:text-purple-400 text-[10px]"></i> Customized
-                            Shopify & WooCommerce Platforms</li>
+                                class="fas fa-check text-purple-600 dark:text-purple-400 text-[10px]"></i> Full Codebase
+                            & Architecture Audit</li>
                         <li class="flex items-center gap-2"><i
-                                class="fas fa-check text-purple-600 dark:text-purple-400 text-[10px]"></i> Payment
-                            Gateway & Automated Invoicing</li>
+                                class="fas fa-check text-purple-600 dark:text-purple-400 text-[10px]"></i> Database
+                            Query & Index Optimization</li>
                         <li class="flex items-center gap-2"><i
-                                class="fas fa-check text-purple-600 dark:text-purple-400 text-[10px]"></i> Tailored
-                            Checkout & Inventory Workflows</li>
+                                class="fas fa-check text-purple-600 dark:text-purple-400 text-[10px]"></i> Cloud Cost &
+                            Infra Scaling Strategy</li>
                     </ul>
                 </div>
 
-                <!-- Pillar 4 -->
+                <!-- Outcome 4: Growth & SEO (retained, reframed) -->
                 <div
-                    class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 transition-all hover:border-slate-300 dark:hover:border-slate-700 shadow-sm">
-                    <div
-                        class="w-8 h-8 rounded-lg bg-amber-50 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400 flex items-center justify-center text-sm mb-4">
-                        <i class="fas fa-chart-line"></i>
+                    class="outcome-card bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm">
+                    <div class="flex items-start gap-3 mb-3">
+                        <div
+                            class="w-9 h-9 rounded-lg bg-amber-50 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400 flex items-center justify-center text-sm shrink-0">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div>
+                            <span
+                                class="cs-badge bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 mb-1">Organic
+                                Growth</span>
+                            <h3 class="text-base font-semibold text-slate-900 dark:text-white leading-snug">
+                                Revenue-Driven Growth Engine</h3>
+                        </div>
                     </div>
-                    <h3 class="text-base font-semibold text-slate-900 dark:text-white mb-1.5">4. Growth & Technical SEO
-                    </h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-xs mb-4 leading-relaxed">Ensuring your product is
-                        built for discoverability, tracking, and rapid iteration.</p>
+                    <p class="text-slate-500 dark:text-slate-400 text-xs mb-4 leading-relaxed">Built-in discoverability,
+                        conversion funnels, and tracking so your product grows without burning ad budget.</p>
                     <ul class="space-y-2 text-xs text-slate-700 dark:text-slate-300">
                         <li class="flex items-center gap-2"><i
                                 class="fas fa-check text-amber-600 dark:text-amber-400 text-[10px]"></i> Technical SEO &
                             Organic Visibility</li>
                         <li class="flex items-center gap-2"><i
-                                class="fas fa-check text-amber-600 dark:text-amber-400 text-[10px]"></i> Campaign
-                            Funnels & High-Converting Landing Pages</li>
+                                class="fas fa-check text-amber-600 dark:text-amber-400 text-[10px]"></i> High-Converting
+                            Landing Pages & Funnels</li>
                         <li class="flex items-center gap-2"><i
                                 class="fas fa-check text-amber-600 dark:text-amber-400 text-[10px]"></i> Behavioral
                             Analytics & Conversion Tracking</li>
                     </ul>
+                </div>
+
+                <!-- Outcome 5: E-Commerce & Website Development -->
+                <div
+                    class="outcome-card bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-sm">
+                    <div class="flex items-start gap-3 mb-3">
+                        <div
+                            class="w-9 h-9 rounded-lg bg-orange-50 dark:bg-orange-950/50 text-orange-600 dark:text-orange-400 flex items-center justify-center text-sm shrink-0">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <div>
+                            <span
+                                class="cs-badge bg-orange-100 dark:bg-orange-950 text-orange-700 dark:text-orange-300 mb-1">Sell
+                                Online</span>
+                            <h3 class="text-base font-semibold text-slate-900 dark:text-white leading-snug">E-Commerce
+                                &amp; Website Development</h3>
+                        </div>
+                    </div>
+                    <p class="text-slate-500 dark:text-slate-400 text-xs mb-4 leading-relaxed">Custom storefronts and
+                        marketing websites on Shopify, WooCommerce, or WordPress — built to convert visitors into paying
+                        customers from day one.</p>
+                    <ul class="space-y-2 text-xs text-slate-700 dark:text-slate-300">
+                        <li class="flex items-center gap-2"><i
+                                class="fas fa-check text-orange-600 dark:text-orange-400 text-[10px]"></i> Shopify &amp;
+                            WooCommerce Storefronts</li>
+                        <li class="flex items-center gap-2"><i
+                                class="fas fa-check text-orange-600 dark:text-orange-400 text-[10px]"></i> WordPress /
+                            Custom CMS Websites</li>
+                        <li class="flex items-center gap-2"><i
+                                class="fas fa-check text-orange-600 dark:text-orange-400 text-[10px]"></i> Payment
+                            Gateway &amp; Automated Invoicing</li>
+                        <li class="flex items-center gap-2"><i
+                                class="fas fa-check text-orange-600 dark:text-orange-400 text-[10px]"></i> Tailored
+                            Checkout &amp; Inventory Workflows</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ⑤ How We Work Timeline -->
+        <section class="space-y-6">
+            <div class="space-y-1">
+                <p
+                    class="text-[11px] font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400 font-semibold">
+                    Zero Surprises</p>
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">How We Work Together</h2>
+                <p class="text-slate-500 dark:text-slate-400 text-sm">A clear 3-phase process so you always know exactly
+                    where your project stands.</p>
+            </div>
+
+            <div class="relative space-y-6">
+                <!-- Step 1 -->
+                <div class="timeline-step relative flex gap-5 pl-1">
+                    <div class="shrink-0 flex flex-col items-center">
+                        <div
+                            class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm shadow-lg shadow-blue-500/30 z-10 relative">
+                            1
+                        </div>
+                    </div>
+                    <div
+                        class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 flex-1 shadow-sm">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-sm font-bold text-slate-900 dark:text-white">Discovery & Architecture Sync
+                            </h3>
+                            <span
+                                class="text-[11px] font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50 px-2.5 py-0.5 rounded-full">Days
+                                1–3</span>
+                        </div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Map out user flows, stack
+                            selection, database design, and technical scope. You get a written architecture brief before
+                            a single line of code is written.</p>
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <span
+                                class="text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 px-2.5 py-1 rounded-full font-medium">User
+                                Flow Mapping</span>
+                            <span
+                                class="text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 px-2.5 py-1 rounded-full font-medium">Stack
+                                Selection</span>
+                            <span
+                                class="text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 px-2.5 py-1 rounded-full font-medium">DB
+                                Design</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="timeline-step relative flex gap-5 pl-1">
+                    <div class="shrink-0 flex flex-col items-center">
+                        <div
+                            class="w-10 h-10 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-sm shadow-lg shadow-emerald-500/30 z-10 relative">
+                            2
+                        </div>
+                    </div>
+                    <div
+                        class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 flex-1 shadow-sm">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-sm font-bold text-slate-900 dark:text-white">Rapid Development Sprints</h3>
+                            <span
+                                class="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-2.5 py-0.5 rounded-full">Weeks
+                                1–4</span>
+                        </div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Weekly demo builds, clean
+                            code execution, and daily progress updates via WhatsApp. You see working software every
+                            single week — no black-box development.</p>
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <span
+                                class="text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 px-2.5 py-1 rounded-full font-medium">Weekly
+                                Demos</span>
+                            <span
+                                class="text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 px-2.5 py-1 rounded-full font-medium">Daily
+                                Updates</span>
+                            <span
+                                class="text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 px-2.5 py-1 rounded-full font-medium">Clean
+                                Code</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="timeline-step relative flex gap-5 pl-1">
+                    <div class="shrink-0 flex flex-col items-center">
+                        <div
+                            class="w-10 h-10 rounded-full bg-purple-600 text-white flex items-center justify-center font-bold text-sm shadow-lg shadow-purple-500/30 z-10 relative">
+                            3
+                        </div>
+                    </div>
+                    <div
+                        class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 flex-1 shadow-sm">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-sm font-bold text-slate-900 dark:text-white">Launch & Handover</h3>
+                            <span
+                                class="text-[11px] font-semibold text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-950/50 px-2.5 py-0.5 rounded-full">Final
+                                Phase</span>
+                        </div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Cloud deployment, security
+                            hardening, full documentation, and a knowledge transfer session so your team can confidently
+                            own the codebase going forward.</p>
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <span
+                                class="text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 px-2.5 py-1 rounded-full font-medium">Cloud
+                                Deploy</span>
+                            <span
+                                class="text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 px-2.5 py-1 rounded-full font-medium">Security
+                                Setup</span>
+                            <span
+                                class="text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 px-2.5 py-1 rounded-full font-medium">Full
+                                Docs</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -451,148 +772,170 @@
             </div>
         </section>
 
-        <!-- Technical Writing & Insights Section -->
+        <!-- ② Production Case Studies (renamed from Technical Writing) -->
         <section class="space-y-6">
             <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
                 <div class="space-y-1">
                     <p
                         class="text-[11px] font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400 font-semibold">
-                        Technical Writing & Thoughts</p>
-                    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Articles on Medium</h2>
+                        Production Case Studies & Systems Built</p>
+                    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Real Systems. Real Scale.
+                    </h2>
                 </div>
                 <a href="https://medium.com/@ravisahu" target="_blank"
-                    class="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline">
-                    <span>View all Medium articles</span>
+                    class="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline shrink-0">
+                    <span>View all case studies</span>
                     <i class="fas fa-arrow-right text-[10px]"></i>
                 </a>
             </div>
 
             <div class="grid sm:grid-cols-3 gap-4">
-                <!-- Article Card 1 -->
+                <!-- Case Study 1 -->
                 <a href="https://medium.com/@ravisahu/accelerating-execution-through-strategic-pod-separation-101dd95a7d11"
                     target="_blank"
-                    class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-xl flex flex-col justify-between space-y-4 shadow-sm hover:border-slate-300 dark:hover:border-slate-700 transition-all">
+                    class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-xl flex flex-col justify-between space-y-4 shadow-sm hover:border-blue-300 dark:hover:border-blue-700 transition-all">
                     <div class="space-y-2">
-                        <div class="flex items-center justify-between text-[11px] text-slate-400 dark:text-slate-500">
-                            <span>Team Structure</span>
+                        <div class="flex items-center justify-between">
+                            <span class="cs-badge bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300"><i
+                                    class="fas fa-users-cog mr-1"></i>Org Design</span>
                             <i class="fab fa-medium text-slate-700 dark:text-slate-300 text-sm"></i>
                         </div>
                         <h3
                             class="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug">
-                            Accelerating Execution through Strategic Pod Separation
+                            Case Study: Engineering Team Scaling via Strategic Pod Separation
                         </h3>
                         <p class="text-slate-500 dark:text-slate-400 text-xs leading-relaxed">
-                            In any fast-paced organization building a large-scale product, execution often gets
-                            bottlenecked not due to ...
+                            How separating engineering pods by responsibility boundaries eliminated bottlenecks and 2×'d
+                            sprint velocity in a fast-scaling product org.
                         </p>
                     </div>
                     <div
                         class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
                         <span>3 min read</span>
-                        <span class="font-medium group-hover:translate-x-0.5 transition-transform">Read post
+                        <span class="font-medium group-hover:translate-x-0.5 transition-transform">Read case study
                             &rarr;</span>
                     </div>
                 </a>
 
-                <!-- Article Card 2 -->
+                <!-- Case Study 2 -->
                 <a href="https://medium.com/@ravisahu/how-we-built-a-scalable-event-streaming-system-to-democratize-data-at-wiom-689a0b916ca8"
                     target="_blank"
-                    class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-xl flex flex-col justify-between space-y-4 shadow-sm hover:border-slate-300 dark:hover:border-slate-700 transition-all">
+                    class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-xl flex flex-col justify-between space-y-4 shadow-sm hover:border-blue-300 dark:hover:border-blue-700 transition-all">
                     <div class="space-y-2">
-                        <div class="flex items-center justify-between text-[11px] text-slate-400 dark:text-slate-500">
-                            <span>System Architecture</span>
+                        <div class="flex items-center justify-between">
+                            <span class="cs-badge bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300"><i
+                                    class="fas fa-building mr-1"></i>Wiom</span>
                             <i class="fab fa-medium text-slate-700 dark:text-slate-300 text-sm"></i>
                         </div>
                         <h3
                             class="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug">
-                            How We Built a Scalable Event Streaming System to Democratize Data at Wiom
+                            Case Study: Scaling Event Streaming & Real-Time Data (Wiom)
                         </h3>
                         <p class="text-slate-500 dark:text-slate-400 text-xs leading-relaxed">
-                            Our architectural foundation was initially built on SQL Server, which powered everything
-                            from customer ...
+                            Built high-throughput data pipelines at Wiom, transitioning from SQL Server to scalable
+                            streaming architectures to democratize real-time data access.
                         </p>
                     </div>
                     <div
                         class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
                         <span>4 min read</span>
-                        <span class="font-medium group-hover:translate-x-0.5 transition-transform">Read post
+                        <span class="font-medium group-hover:translate-x-0.5 transition-transform">Read case study
                             &rarr;</span>
                     </div>
                 </a>
 
-                <!-- Article Card 3 -->
+                <!-- Case Study 3 -->
                 <a href="https://medium.com/@ravisahu/how-brotli-gzip-compression-boosted-our-server-performance-1fbc11709dd1"
                     target="_blank"
-                    class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-xl flex flex-col justify-between space-y-4 shadow-sm hover:border-slate-300 dark:hover:border-slate-700 transition-all">
+                    class="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-xl flex flex-col justify-between space-y-4 shadow-sm hover:border-blue-300 dark:hover:border-blue-700 transition-all">
                     <div class="space-y-2">
-                        <div class="flex items-center justify-between text-[11px] text-slate-400 dark:text-slate-500">
-                            <span>Software Architecture</span>
+                        <div class="flex items-center justify-between">
+                            <span
+                                class="cs-badge bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300"><i
+                                    class="fas fa-tachometer-alt mr-1"></i>Performance</span>
                             <i class="fab fa-medium text-slate-700 dark:text-slate-300 text-sm"></i>
                         </div>
                         <h3
                             class="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug">
-                            How Brotli & Gzip Compression Boosted Our Server Performance
+                            Case Study: Infrastructure & Server Performance Optimization
                         </h3>
                         <p class="text-slate-500 dark:text-slate-400 text-xs leading-relaxed">
-                            Enhancing server performance is critical for improving user experience and reducing
-                            infrastructure costs...
+                            Reduced server overhead and improved load times significantly using low-level Brotli & Gzip
+                            compression strategies in production infrastructure.
                         </p>
                     </div>
                     <div
                         class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
                         <span>3 min read</span>
-                        <span class="font-medium group-hover:translate-x-0.5 transition-transform">Read post
+                        <span class="font-medium group-hover:translate-x-0.5 transition-transform">Read case study
                             &rarr;</span>
                     </div>
                 </a>
             </div>
         </section>
 
-        <footer class="text-center border-t border-slate-200 dark:border-slate-800 pt-10 pb-6 space-y-6">
-            <div class="space-y-2">
-                <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Let's Build Your Startup
-                    Together</h2>
-                <p class="text-slate-500 dark:text-slate-400 text-xs max-w-md mx-auto">
-                    Reach out directly via WhatsApp, Phone, or LinkedIn to discuss your project scope and timelines.
+        <footer class="border-t border-slate-200 dark:border-slate-800 pt-10 pb-6 space-y-8">
+            <!-- ③ Free 15-min CTA Banner in footer -->
+            <div
+                class="bg-gradient-to-br from-blue-600 to-blue-700 dark:from-blue-700 dark:to-blue-800 rounded-2xl p-6 sm:p-8 text-center space-y-4 shadow-xl shadow-blue-500/20">
+                <div
+                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-white text-[11px] font-semibold tracking-wide">
+                    <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                    Zero Commitment · No Sales Pitch · Just Real Advice
+                </div>
+                <h2 class="text-xl sm:text-2xl font-extrabold text-white leading-tight">
+                    Book a Free 15-Minute Technical Feasibility<br class="hidden sm:block"> & Architecture Teardown
+                </h2>
+                <p class="text-blue-100 text-sm max-w-md mx-auto leading-relaxed">
+                    Tell me what you're building. I'll map out your tech stack, surface hidden risks, and give you a
+                    clear path forward — completely free.
+                </p>
+                <div class="flex flex-wrap items-center justify-center gap-3 pt-1">
+                    <a href="https://wa.me/918586004551?text=Hi%20Ravi%2C%20I%27d%20like%20to%20book%20a%20free%2015-minute%20Technical%20Feasibility%20%26%20Architecture%20Teardown%20call."
+                        target="_blank" id="footer-free-call-cta"
+                        class="bg-white hover:bg-blue-50 text-blue-700 font-bold px-6 py-2.5 rounded-xl text-sm flex items-center gap-2 transition-all shadow-sm">
+                        <i class="fab fa-whatsapp text-emerald-500"></i>
+                        Book Free 15-Min Call
+                    </a>
+                    <a href="tel:+918586004551"
+                        class="border border-white/40 hover:border-white text-white px-5 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-2 transition-all">
+                        <i class="fas fa-phone text-xs"></i>
+                        +91 85860 04551
+                    </a>
+                </div>
+            </div>
+
+            <!-- Footer links -->
+            <div class="text-center space-y-4">
+                <p class="text-slate-500 dark:text-slate-400 text-xs">
+                    Or reach out directly via any of these channels:
+                </p>
+                <div class="flex flex-wrap items-center justify-center gap-2.5">
+                    <a href="https://medium.com/@ravisahu" target="_blank"
+                        class="bg-slate-200/60 dark:bg-slate-800/60 hover:bg-slate-300/60 dark:hover:bg-slate-700/60 text-slate-800 dark:text-slate-200 px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all">
+                        <i class="fab fa-medium text-slate-800 dark:text-slate-200"></i>
+                        <span>Case Studies</span>
+                    </a>
+                    <a href="https://github.com/ravisahu2017" target="_blank"
+                        class="bg-slate-200/60 dark:bg-slate-800/60 hover:bg-slate-300/60 dark:hover:bg-slate-700/60 text-slate-800 dark:text-slate-200 px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all">
+                        <i class="fab fa-github text-slate-800 dark:text-slate-200"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://linkedin.com/in/ravisahu2017" target="_blank"
+                        class="bg-slate-200/60 dark:bg-slate-800/60 hover:bg-slate-300/60 dark:hover:bg-slate-700/60 text-slate-800 dark:text-slate-200 px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all">
+                        <i class="fab fa-linkedin text-blue-600 dark:text-blue-400"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="mailto:ravi.sahu2017@gmail.com"
+                        class="bg-slate-200/60 dark:bg-slate-800/60 hover:bg-slate-300/60 dark:hover:bg-slate-700/60 text-slate-800 dark:text-slate-200 px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all">
+                        <i class="fas fa-envelope text-xs"></i>
+                        <span>ravi.sahu2017@gmail.com</span>
+                    </a>
+                </div>
+                <p class="text-[11px] text-slate-400 dark:text-slate-600 pt-4">
+                    © <span id="year">2026</span> ravisahu.in — Fractional CTO & Technical Founding Partner
                 </p>
             </div>
-
-            <div class="flex flex-wrap items-center justify-center gap-2.5 pt-2">
-                <a href="https://wa.me/918586004551" target="_blank"
-                    class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all">
-                    <i class="fab fa-whatsapp"></i>
-                    <span>WhatsApp</span>
-                </a>
-                <a href="tel:+918586004551"
-                    class="bg-slate-200/60 dark:bg-slate-800/60 hover:bg-slate-300/60 dark:hover:bg-slate-700/60 text-slate-800 dark:text-slate-200 px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all">
-                    <i class="fas fa-phone text-xs"></i>
-                    <span>+91 85860 04551</span>
-                </a>
-                <a href="https://medium.com/@ravisahu" target="_blank"
-                    class="bg-slate-200/60 dark:bg-slate-800/60 hover:bg-slate-300/60 dark:hover:bg-slate-700/60 text-slate-800 dark:text-slate-200 px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all">
-                    <i class="fab fa-medium text-slate-800 dark:text-slate-200"></i>
-                    <span>Medium Articles</span>
-                </a>
-                <a href="https://github.com/ravisahu2017" target="_blank"
-                    class="bg-slate-200/60 dark:bg-slate-800/60 hover:bg-slate-300/60 dark:hover:bg-slate-700/60 text-slate-800 dark:text-slate-200 px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all">
-                    <i class="fab fa-github text-slate-800 dark:text-slate-200"></i>
-                    <span>GitHub Profile</span>
-                </a>
-                <a href="https://linkedin.com/in/ravisahu2017" target="_blank"
-                    class="bg-slate-200/60 dark:bg-slate-800/60 hover:bg-slate-300/60 dark:hover:bg-slate-700/60 text-slate-800 dark:text-slate-200 px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all">
-                    <i class="fab fa-linkedin text-blue-600 dark:text-blue-400"></i>
-                    <span>LinkedIn Profile</span>
-                </a>
-                <a href="mailto:ravi.sahu2017@gmail.com"
-                    class="bg-slate-200/60 dark:bg-slate-800/60 hover:bg-slate-300/60 dark:hover:bg-slate-700/60 text-slate-800 dark:text-slate-200 px-4 py-2 rounded-lg text-xs font-semibold flex items-center gap-2 transition-all">
-                    <i class="fas fa-envelope text-xs"></i>
-                    <span>ravi.sahu2017@gmail.com</span>
-                </a>
-            </div>
-
-            <p class="text-[11px] text-slate-400 dark:text-slate-600 pt-6">
-                © <span id="year">2026</span> ravisahu.in — Fractional CTO & Technical Founding Partner
-            </p>
         </footer>
 
     </main>
