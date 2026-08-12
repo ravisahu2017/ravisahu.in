@@ -106,143 +106,7 @@
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-
-        .badge-flip.flipped {
-            transform: rotateY(180deg);
-        }
-
-        /* Social proof bar marquee */
-        @keyframes brand-slide {
-            0% {
-                transform: translateX(0);
-            }
-
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
-        .brand-track {
-            display: flex;
-            animation: brand-slide 18s linear infinite;
-            width: max-content;
-        }
-
-        .brand-track:hover {
-            animation-play-state: paused;
-        }
-
-        /* Timeline connector */
-        .timeline-step:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            left: 19px;
-            top: 40px;
-            bottom: -24px;
-            width: 2px;
-            background: linear-gradient(to bottom, #3b82f6, transparent);
-        }
-
-        /* Outcome card hover glow */
-        .outcome-card {
-            transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
-        }
-
-        .outcome-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px -6px rgba(59, 130, 246, 0.18);
-        }
-
-        /* Free call banner pulse ring */
-        @keyframes ping-slow {
-
-            75%,
-            100% {
-                transform: scale(2);
-                opacity: 0;
-            }
-        }
-
-        .ping-slow {
-            animation: ping-slow 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
-        }
-
-        /* Case study badge */
-        .cs-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: .06em;
-            text-transform: uppercase;
-            padding: 2px 8px;
-            border-radius: 99px;
-        }
-
-        /* ── Section scroll dot nav ── */
-        html {
-            scroll-behavior: smooth;
-            scroll-snap-type: y mandatory;
-        }
-        main > section {
-            scroll-snap-align: start;
-            scroll-snap-stop: always;
-            scroll-margin-top: 64px; /* height of sticky header */
-        }
-        #section-nav {
-            position: fixed;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            z-index: 40;
-        }
-        @media (max-width: 1279px) { #section-nav { display: none; } }
-        .snav-dot {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            gap: 8px;
-            cursor: pointer;
-            padding: 2px 0;
-        }
-        .snav-label {
-            opacity: 0;
-            transform: translateX(6px);
-            transition: opacity 0.2s ease, transform 0.2s ease;
-            pointer-events: none;
-            white-space: nowrap;
-            background: rgba(15,23,42,0.85);
-            color: #f8fafc;
-            font-size: 10px;
-            font-weight: 600;
-            letter-spacing: .05em;
-            padding: 3px 10px;
-            border-radius: 99px;
-        }
-        .dark .snav-label { background: rgba(255,255,255,0.10); color: #f1f5f9; }
-        .snav-dot:hover .snav-label { opacity: 1; transform: translateX(0); }
-        .snav-dot.s-active .snav-label { opacity: 1; transform: translateX(0); }
-        .snav-pip {
-            width: 8px;
-            height: 8px;
-            border-radius: 99px;
-            background: #cbd5e1;
-            transition: background 0.3s, transform 0.3s, width 0.3s;
-            flex-shrink: 0;
-        }
-        .dark .snav-pip { background: #475569; }
-        .snav-dot.s-active .snav-pip { background: #2563eb; transform: scale(1.4); }
-        .snav-dot:hover .snav-pip { background: #60a5fa; }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body
@@ -1254,17 +1118,7 @@
         // Set dynamic year
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Scroll-triggered RS Badge Flip
         const rsBadge = document.getElementById('rsBadge');
-        const handleScroll = () => {
-            if (window.scrollY > 30) {
-                rsBadge?.classList.add('flipped');
-            } else {
-                rsBadge?.classList.remove('flipped');
-            }
-        };
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        handleScroll();
 
         // ── Section dot navigator ──
         (function () {
@@ -1283,6 +1137,13 @@
                 sectionIds.forEach(id => { if (ratios[id] > ratios[best]) best = id; });
                 Object.values(dots).forEach(d => d.classList.remove('s-active'));
                 if (dots[best]) dots[best].classList.add('s-active');
+
+                // Badge: RS on hero, photo on all other sections
+                if (best === 'sec-hero') {
+                    rsBadge?.classList.remove('flipped');
+                } else {
+                    rsBadge?.classList.add('flipped');
+                }
             }
 
             const observer = new IntersectionObserver(entries => {
