@@ -183,6 +183,65 @@
             padding: 2px 8px;
             border-radius: 99px;
         }
+
+        /* ── Section scroll dot nav ── */
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+        }
+        main > section {
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            scroll-margin-top: 64px; /* height of sticky header */
+        }
+        #section-nav {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 40;
+        }
+        @media (max-width: 1279px) { #section-nav { display: none; } }
+        .snav-dot {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+            cursor: pointer;
+            padding: 2px 0;
+        }
+        .snav-label {
+            opacity: 0;
+            transform: translateX(6px);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            pointer-events: none;
+            white-space: nowrap;
+            background: rgba(15,23,42,0.85);
+            color: #f8fafc;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: .05em;
+            padding: 3px 10px;
+            border-radius: 99px;
+        }
+        .dark .snav-label { background: rgba(255,255,255,0.10); color: #f1f5f9; }
+        .snav-dot:hover .snav-label { opacity: 1; transform: translateX(0); }
+        .snav-dot.s-active .snav-label { opacity: 1; transform: translateX(0); }
+        .snav-pip {
+            width: 8px;
+            height: 8px;
+            border-radius: 99px;
+            background: #cbd5e1;
+            transition: background 0.3s, transform 0.3s, width 0.3s;
+            flex-shrink: 0;
+        }
+        .dark .snav-pip { background: #475569; }
+        .snav-dot.s-active .snav-pip { background: #2563eb; transform: scale(1.4); }
+        .snav-dot:hover .snav-pip { background: #60a5fa; }
     </style>
 </head>
 
@@ -255,7 +314,39 @@
 
     <main class="max-w-5xl mx-auto px-4 sm:px-6 py-12 space-y-20">
 
-        <section class="text-center py-4 max-w-2xl mx-auto space-y-6">
+        <!-- Floating dot section nav (xl screens only) -->
+        <nav id="section-nav" aria-label="Page sections">
+            <div class="snav-dot s-active" data-target="sec-hero" onclick="document.getElementById('sec-hero').scrollIntoView({behavior:'smooth'})">
+                <span class="snav-label">Intro</span>
+                <span class="snav-pip"></span>
+            </div>
+            <div class="snav-dot" data-target="sec-outcomes" onclick="document.getElementById('sec-outcomes').scrollIntoView({behavior:'smooth'})">
+                <span class="snav-label">Services</span>
+                <span class="snav-pip"></span>
+            </div>
+            <div class="snav-dot" data-target="sec-process" onclick="document.getElementById('sec-process').scrollIntoView({behavior:'smooth'})">
+                <span class="snav-label">Process</span>
+                <span class="snav-pip"></span>
+            </div>
+            <div class="snav-dot" data-target="sec-why" onclick="document.getElementById('sec-why').scrollIntoView({behavior:'smooth'})">
+                <span class="snav-label">Why Me</span>
+                <span class="snav-pip"></span>
+            </div>
+            <div class="snav-dot" data-target="sec-faq" onclick="document.getElementById('sec-faq').scrollIntoView({behavior:'smooth'})">
+                <span class="snav-label">FAQ</span>
+                <span class="snav-pip"></span>
+            </div>
+            <div class="snav-dot" data-target="sec-projects" onclick="document.getElementById('sec-projects').scrollIntoView({behavior:'smooth'})">
+                <span class="snav-label">Projects</span>
+                <span class="snav-pip"></span>
+            </div>
+            <div class="snav-dot" data-target="sec-casestudies" onclick="document.getElementById('sec-casestudies').scrollIntoView({behavior:'smooth'})">
+                <span class="snav-label">Case Studies</span>
+                <span class="snav-pip"></span>
+            </div>
+        </nav>
+
+        <section id="sec-hero" class="text-center py-4 max-w-2xl mx-auto space-y-6">
             <div
                 class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-200/60 dark:bg-slate-800/60 border border-slate-300/50 dark:border-slate-700/50 text-slate-700 dark:text-slate-300 text-[11px] font-medium tracking-wide">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -381,7 +472,7 @@
         </section>
 
         <!-- ④ Capabilities reframed as Founder Outcomes -->
-        <section class="space-y-6">
+        <section id="sec-outcomes" class="space-y-6">
             <div class="space-y-1">
                 <p
                     class="text-[11px] font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400 font-semibold">
@@ -555,7 +646,7 @@
         </section>
 
         <!-- ⑤ How We Work Timeline -->
-        <section class="space-y-6">
+        <section id="sec-process" class="space-y-6">
             <div class="space-y-1">
                 <p
                     class="text-[11px] font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400 font-semibold">
@@ -668,7 +759,7 @@
             </div>
         </section>
 
-        <section
+        <section id="sec-why"
             class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 sm:p-8 space-y-6 shadow-sm">
             <div class="space-y-1 text-center max-w-xl mx-auto">
                 <p
@@ -700,7 +791,7 @@
         </section>
 
         <!-- Fractional CTO FAQ Section (SEO Boost) -->
-        <section class="space-y-6">
+        <section id="sec-faq" class="space-y-6">
             <div class="space-y-1">
                 <p
                     class="text-[11px] font-mono uppercase tracking-widest text-slate-500 dark:text-slate-400 font-semibold">
@@ -777,7 +868,7 @@
         </section>
 
         <!-- Live Projects Built -->
-        <section class="space-y-6">
+        <section id="sec-projects" class="space-y-6">
             <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
                 <div class="space-y-1">
                     <p
@@ -960,7 +1051,7 @@
         </section>
 
         <!-- ② Production Case Studies (renamed from Technical Writing) -->
-        <section class="space-y-6">
+        <section id="sec-casestudies" class="space-y-6">
 
             <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
                 <div class="space-y-1">
@@ -1174,6 +1265,36 @@
         };
         window.addEventListener('scroll', handleScroll, { passive: true });
         handleScroll();
+
+        // ── Section dot navigator ──
+        (function () {
+            const sectionIds = ['sec-hero','sec-outcomes','sec-process','sec-why','sec-faq','sec-projects','sec-casestudies'];
+            const dots = {};
+            document.querySelectorAll('#section-nav .snav-dot').forEach(dot => {
+                const id = dot.dataset.target;
+                if (id) dots[id] = dot;
+            });
+
+            const ratios = {};
+            sectionIds.forEach(id => { ratios[id] = 0; });
+
+            function updateActive() {
+                let best = sectionIds[0];
+                sectionIds.forEach(id => { if (ratios[id] > ratios[best]) best = id; });
+                Object.values(dots).forEach(d => d.classList.remove('s-active'));
+                if (dots[best]) dots[best].classList.add('s-active');
+            }
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(e => { ratios[e.target.id] = e.intersectionRatio; });
+                updateActive();
+            }, { threshold: Array.from({length: 21}, (_, i) => i * 0.05) });
+
+            sectionIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) observer.observe(el);
+            });
+        })();
     </script>
 </body>
 
